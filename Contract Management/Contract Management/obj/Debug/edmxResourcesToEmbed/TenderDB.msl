@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="contractsdbModelStoreContainer" CdmEntityContainer="contractsdbEntities">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="contractsdbModel.admin">
+        <MappingFragment StoreEntitySet="admins">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="pwd" ColumnName="pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contractors">
+      <EntityTypeMapping TypeName="contractsdbModel.contractor">
+        <MappingFragment StoreEntitySet="contractors">
+          <ScalarProperty Name="ans3" ColumnName="ans3" />
+          <ScalarProperty Name="q3" ColumnName="q3" />
+          <ScalarProperty Name="ans2" ColumnName="ans2" />
+          <ScalarProperty Name="q2" ColumnName="q2" />
+          <ScalarProperty Name="ans1" ColumnName="ans1" />
+          <ScalarProperty Name="q1" ColumnName="q1" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="pwd" ColumnName="pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tenders">
+      <EntityTypeMapping TypeName="contractsdbModel.tender">
+        <MappingFragment StoreEntitySet="tenders">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="duedate" ColumnName="duedate" />
+          <ScalarProperty Name="minquote" ColumnName="minquote" />
+          <ScalarProperty Name="tdate" ColumnName="tdate" />
+          <ScalarProperty Name="ttype" ColumnName="ttype" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="securityques">
+      <EntityTypeMapping TypeName="contractsdbModel.securityque">
+        <MappingFragment StoreEntitySet="securityques">
+          <ScalarProperty Name="qdesc" ColumnName="qdesc" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="applytenders">
+      <EntityTypeMapping TypeName="contractsdbModel.applytender">
+        <MappingFragment StoreEntitySet="applytender">
+          <ScalarProperty Name="approvaldate" ColumnName="approvaldate" />
+          <ScalarProperty Name="document" ColumnName="document" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="bidamount" ColumnName="bidamount" />
+          <ScalarProperty Name="applydate" ColumnName="applydate" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

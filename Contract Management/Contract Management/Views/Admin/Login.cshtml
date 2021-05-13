@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="/Content/bootstrap.css">
+    <link rel="stylesheet" href="/Content/all.css">
+    <link rel="icon" href="/images/logo.jpg" />
+    <style>
+        .bg-new {
+            background-image: url('/images/bg.jpg');
+            background-size: 100%;
+            background-position: -50%;
+            box-shadow: 0 0 2px 2px gray;
+        }
+
+        body {
+            background: linear-gradient( rgba(255, 255, 255, 0.8) 100%, rgba(255, 255, 255, 0.5) 100%),url('/images/bg.png');
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body style="height: 100vh; background-color: rgb(234, 245, 250);">
+    <div class="jumbotron rounded-0 p-3 mb-2 bg-transparent text-white text-center" style="box-shadow: 0 0 5px 2px gray">
+        <h2 class="text-center ml-5" style="text-shadow:2px 2px 2px black;">Login Screen</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 mx-auto">
+                <div class="card bg-transparent text-center mt-5 p-3 shadow">
+                <img src="/images/logo.jpg" style="width:200px;" class="my-2 mx-auto d-block rounded-circle" />
+                <form method="post" autocomplete="off">
+                    <div class="form-group">
+                        <input type="text" placeholder="User ID here" name="userid" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwd" placeholder="Password here" class="form-control">
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-danger btn-block" />
+                </form>
+                <a href="/register">Not registered Click here</a>
+                @if (TempData["error"] != null)
+                {
+                    <p class="text-danger font-weight-bold">@TempData["error"]</p>
+                }
+                @if (TempData["msg"] != null)
+                {
+                    <p class="text-success font-weight-bold">@TempData["msg"]</p>
+                }
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

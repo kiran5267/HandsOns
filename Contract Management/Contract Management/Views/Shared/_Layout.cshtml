@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 p-0">
+                <img src="~/images/logo.jpg" class="img-thumbnail rounded-circle d-block mx-auto" style="width:200px;" />
+                @if (Session["userid"].ToString() == "admin")
+                {
+                    <h4 class="p-2 text-center">Administrator</h4>
+                    <div class="list-group">
+                        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+                        <a href="/contractors" class="list-group-item list-group-item-action">Contractors</a>
+                        <a href="/tendors" class="list-group-item list-group-item-action">Tendors</a>                        
+                        <a href="/reports" class="list-group-item list-group-item-action">Reports</a>                        
+                        <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
+                    </div>
+                }
+                else
+                {
+                    <h4 class="pt-2 text-center">@Session["uname"]</h4>
+                    <h5 class="text-center">(Contractor)</h5>
+                    <div class="list-group">
+                        <a href="/home" class="list-group-item list-group-item-action">Profile</a>                        
+                        <a href="/tendors" class="list-group-item list-group-item-action">Tendors</a>
+                        <a href="/mytendors" class="list-group-item list-group-item-action">My Tendors</a>                        
+                        <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-10 p-2">
+                <h4 class="text-center border-bottom p-2">Tendor Management System</h4>
+                <div class="container-fluid p-2 shadow" style="min-height:90vh">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

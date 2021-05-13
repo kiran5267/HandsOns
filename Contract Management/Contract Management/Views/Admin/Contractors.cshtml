@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Contract_Management.contractor>
+
+@{
+    ViewBag.Title = "Contractors";
+    int? catid = null;
+    if (!string.IsNullOrWhiteSpace(Request.QueryString["cat"])) {
+        catid = Convert.ToInt32(Request.QueryString["cat"]);
+    }
+}
+<div class="float-right">
+    <form class="form-inline">       
+        <label class="font-weight-bold">Filter : </label>
+        <select class="form-control" onchange="document.forms[0].submit()" name="cat" style="width:300px;">
+            <option value="">--- All Contractors ---</option>
+            @foreach (var cat in ViewBag.cats)
+            {
+                <option value="@cat.Id" @(catid==cat.Id ? "selected":"")>@cat.ContractorType</option>
+            }
+        </select>
+    </form>
+</div>
+    
+<h4 class="p-2">Contractors</h4>
+<div class="container-fluid shadow">
+    @if (TempData["msg"] != null)
+    {
+        <p class="text-center text-success font-weight-bold">@TempData["msg"]</p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.userid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "ContractorDetails", new { id = item.userid })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

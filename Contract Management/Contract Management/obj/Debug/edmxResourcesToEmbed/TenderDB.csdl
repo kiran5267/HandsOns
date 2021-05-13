@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="contractsdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="contractor">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="lname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="applytenders" Relationship="contractsdbModel.FK__applytender__cid__3A81B327" FromRole="contractor" ToRole="applytender" />
+    <Property Name="q1" Type="Int32" />
+    <Property Name="ans1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="q2" Type="Int32" />
+    <Property Name="ans2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="q3" Type="Int32" />
+    <Property Name="ans3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="securityque" Relationship="contractsdbModel.FK__contractors__q1__3B75D760" FromRole="contractor" ToRole="securityque" />
+    <NavigationProperty Name="securityque1" Relationship="contractsdbModel.FK__contractors__q2__3C69FB99" FromRole="contractor" ToRole="securityque" />
+    <NavigationProperty Name="securityque2" Relationship="contractsdbModel.FK__contractors__q3__3D5E1FD2" FromRole="contractor" ToRole="securityque" />
+  </EntityType>
+  <EntityContainer Name="contractsdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="contractors" EntityType="Self.contractor" />
+    <EntitySet Name="tenders" EntityType="contractsdbModel.tender" />
+    <EntitySet Name="securityques" EntityType="contractsdbModel.securityque" />
+    <EntitySet Name="applytenders" EntityType="contractsdbModel.applytender" />
+    <AssociationSet Name="FK__applytender__cid__3A81B327" Association="contractsdbModel.FK__applytender__cid__3A81B327">
+      <End Role="contractor" EntitySet="contractors" />
+      <End Role="applytender" EntitySet="applytenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__applytender__tid__398D8EEE" Association="contractsdbModel.FK__applytender__tid__398D8EEE">
+      <End Role="tender" EntitySet="tenders" />
+      <End Role="applytender" EntitySet="applytenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q1__3B75D760" Association="contractsdbModel.FK__contractors__q1__3B75D760">
+      <End Role="securityque" EntitySet="securityques" />
+      <End Role="contractor" EntitySet="contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q2__3C69FB99" Association="contractsdbModel.FK__contractors__q2__3C69FB99">
+      <End Role="securityque" EntitySet="securityques" />
+      <End Role="contractor" EntitySet="contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q3__3D5E1FD2" Association="contractsdbModel.FK__contractors__q3__3D5E1FD2">
+      <End Role="securityque" EntitySet="securityques" />
+      <End Role="contractor" EntitySet="contractors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tender">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="Int32" Nullable="false" />
+    <Property Name="ttype" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="tdate" Type="DateTime" Precision="0" />
+    <Property Name="minquote" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="duedate" Type="DateTime" Precision="0" />
+    <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="applytenders" Relationship="contractsdbModel.FK__applytender__tid__398D8EEE" FromRole="tender" ToRole="applytender" />
+  </EntityType>
+  <EntityType Name="securityque">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="qdesc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="contractors" Relationship="contractsdbModel.FK__contractors__q1__3B75D760" FromRole="securityque" ToRole="contractor" />
+    <NavigationProperty Name="contractors1" Relationship="contractsdbModel.FK__contractors__q2__3C69FB99" FromRole="securityque" ToRole="contractor" />
+    <NavigationProperty Name="contractors2" Relationship="contractsdbModel.FK__contractors__q3__3D5E1FD2" FromRole="securityque" ToRole="contractor" />
+  </EntityType>
+  <EntityType Name="applytender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tid" Type="Int32" />
+    <Property Name="cid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="applydate" Type="DateTime" Precision="3" />
+    <Property Name="bidamount" Type="Decimal" Precision="14" Scale="5" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="document" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="approvaldate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="contractor" Relationship="contractsdbModel.FK__applytender__cid__3A81B327" FromRole="applytender" ToRole="contractor" />
+    <NavigationProperty Name="tender" Relationship="contractsdbModel.FK__applytender__tid__398D8EEE" FromRole="applytender" ToRole="tender" />
+  </EntityType>
+  <Association Name="FK__applytender__cid__3A81B327">
+    <End Type="contractsdbModel.contractor" Role="contractor" Multiplicity="0..1" />
+    <End Type="contractsdbModel.applytender" Role="applytender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="contractor">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="applytender">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__applytender__tid__398D8EEE">
+    <End Type="contractsdbModel.tender" Role="tender" Multiplicity="0..1" />
+    <End Type="contractsdbModel.applytender" Role="applytender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tender">
+        <PropertyRef Name="tid" />
+      </Principal>
+      <Dependent Role="applytender">
+        <PropertyRef Name="tid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q1__3B75D760">
+    <End Type="contractsdbModel.securityque" Role="securityque" Multiplicity="0..1" />
+    <End Type="contractsdbModel.contractor" Role="contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityque">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractor">
+        <PropertyRef Name="q1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q2__3C69FB99">
+    <End Type="contractsdbModel.securityque" Role="securityque" Multiplicity="0..1" />
+    <End Type="contractsdbModel.contractor" Role="contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityque">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractor">
+        <PropertyRef Name="q2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q3__3D5E1FD2">
+    <End Type="contractsdbModel.securityque" Role="securityque" Multiplicity="0..1" />
+    <End Type="contractsdbModel.contractor" Role="contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityque">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractor">
+        <PropertyRef Name="q3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

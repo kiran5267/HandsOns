@@ -1,0 +1,125 @@
+﻿@model Contract_Management.tender
+
+@{
+    ViewBag.Title = "Tendor Details";
+}
+
+<h4 class="p-2">Tendor Details for @Model.tid</h4>
+
+<div class="card shadow">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ttype)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.ttype)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.status)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tdate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.tdate)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.minquote)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.minquote)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.title)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.duedate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.duedate)
+            </td>
+        </tr>
+
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.description)</th>
+            <td colspan="3">
+                @Html.DisplayFor(model => model.description)
+            </td>
+        </tr>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                Contractor Id
+            </th>
+            <th>
+                Contractor Name
+            </th>
+            <th>
+                Apply Date
+            </th>
+            <th>
+                Bid Amount
+            </th>
+            <th>
+                Document
+            </th>
+            <th>
+                Status
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in ViewBag.appliers as IEnumerable<applytender>)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contractor.fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.applydate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bidamount)
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.document)" target="blank" class="btn btn-primary btn-sm">View Document</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @if (Model.status == "Closed")
+            {
+                <h5>Tendor Closed</h5>
+            }
+            else
+            {
+                <a href="/approve/@item.id" class="btn btn-outline-success btn-sm">Approve Tender</a>
+            }
+
+        </td>
+    </tr>
+        }
+</div>

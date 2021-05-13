@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="contractsdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admins">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pwd" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="applytender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tid" Type="int" />
+    <Property Name="cid" Type="varchar" MaxLength="15" />
+    <Property Name="applydate" Type="datetime" />
+    <Property Name="bidamount" Type="decimal" Precision="14" Scale="5" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+    <Property Name="document" Type="varchar" MaxLength="100" />
+    <Property Name="approvaldate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="contractors">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="fname" Type="varchar" MaxLength="15" />
+    <Property Name="lname" Type="varchar" MaxLength="15" />
+    <Property Name="dob" Type="date" />
+    <Property Name="gender" Type="varchar" MaxLength="15" />
+    <Property Name="phone" Type="varchar" MaxLength="10" />
+    <Property Name="address" Type="varchar" MaxLength="40" />
+    <Property Name="email" Type="varchar" MaxLength="40" />
+    <Property Name="category" Type="varchar" MaxLength="30" />
+    <Property Name="pwd" Type="varchar" MaxLength="20" />
+    <Property Name="q1" Type="int" />
+    <Property Name="ans1" Type="varchar" MaxLength="50" />
+    <Property Name="q2" Type="int" />
+    <Property Name="ans2" Type="varchar" MaxLength="50" />
+    <Property Name="q3" Type="int" />
+    <Property Name="ans3" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="securityques">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="qdesc" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tenders">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="100" />
+    <Property Name="ttype" Type="varchar" MaxLength="30" />
+    <Property Name="tdate" Type="date" />
+    <Property Name="minquote" Type="decimal" Precision="14" Scale="2" />
+    <Property Name="duedate" Type="date" />
+    <Property Name="description" Type="varchar" MaxLength="1000" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__applytender__cid__3A81B327">
+    <End Role="contractors" Type="Self.contractors" Multiplicity="0..1" />
+    <End Role="applytender" Type="Self.applytender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="contractors">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="applytender">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__applytender__tid__398D8EEE">
+    <End Role="tenders" Type="Self.tenders" Multiplicity="0..1" />
+    <End Role="applytender" Type="Self.applytender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tenders">
+        <PropertyRef Name="tid" />
+      </Principal>
+      <Dependent Role="applytender">
+        <PropertyRef Name="tid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q1__3B75D760">
+    <End Role="securityques" Type="Self.securityques" Multiplicity="0..1" />
+    <End Role="contractors" Type="Self.contractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityques">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractors">
+        <PropertyRef Name="q1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q2__3C69FB99">
+    <End Role="securityques" Type="Self.securityques" Multiplicity="0..1" />
+    <End Role="contractors" Type="Self.contractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityques">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractors">
+        <PropertyRef Name="q2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__contractors__q3__3D5E1FD2">
+    <End Role="securityques" Type="Self.securityques" Multiplicity="0..1" />
+    <End Role="contractors" Type="Self.contractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="securityques">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contractors">
+        <PropertyRef Name="q3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="contractsdbModelStoreContainer">
+    <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="applytender" EntityType="Self.applytender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="contractors" EntityType="Self.contractors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="securityques" EntityType="Self.securityques" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tenders" EntityType="Self.tenders" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__applytender__cid__3A81B327" Association="Self.FK__applytender__cid__3A81B327">
+      <End Role="contractors" EntitySet="contractors" />
+      <End Role="applytender" EntitySet="applytender" />
+    </AssociationSet>
+    <AssociationSet Name="FK__applytender__tid__398D8EEE" Association="Self.FK__applytender__tid__398D8EEE">
+      <End Role="tenders" EntitySet="tenders" />
+      <End Role="applytender" EntitySet="applytender" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q1__3B75D760" Association="Self.FK__contractors__q1__3B75D760">
+      <End Role="securityques" EntitySet="securityques" />
+      <End Role="contractors" EntitySet="contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q2__3C69FB99" Association="Self.FK__contractors__q2__3C69FB99">
+      <End Role="securityques" EntitySet="securityques" />
+      <End Role="contractors" EntitySet="contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__contractors__q3__3D5E1FD2" Association="Self.FK__contractors__q3__3D5E1FD2">
+      <End Role="securityques" EntitySet="securityques" />
+      <End Role="contractors" EntitySet="contractors" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

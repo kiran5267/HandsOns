@@ -1,0 +1,22 @@
+withdrawal (due amount pay)
+-----------
+wthdraw from cc cash
+
+transactiuoun for withdraw
+
+search card no
+---------------
+details-------------
+
+amount enter
+
+pay
+
+fees
+batchid   --remarks
+
+
+bill payment
+----------------
+deposit into cc
+

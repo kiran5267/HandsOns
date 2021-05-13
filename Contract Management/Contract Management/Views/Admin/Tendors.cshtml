@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Contract_Management.tender>
+
+@{
+    ViewBag.Title = "Tendors";
+    string search = "";
+    if (Request.QueryString["search"] != null)
+    {
+        search = Request.QueryString["search"];
+    }
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        $('#tbldata').DataTable();
+    });
+</script>
+<a href="/addtendor" class="btn btn-primary btn-sm float-right">Add Tendor</a>
+<h4 class="p-2">Tendors</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <form class="form-inline">
+                <input type="search" value="@search" placeholder="Enter title to search" style="width:300px;" class="form-control" name="search" />
+                <input type="submit" value="Search" class="ml-2 btn btn-primary" />
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-2 shadow">
+    @if (TempData["msg"] != null)
+    {
+        <p class="text-center text-success font-weight-bold">@TempData["msg"]</p>
+    }
+    <table class="table" id="tbldata">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.tid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ttype)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tdate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.minquote)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ttype)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tdate)
+                    </td>
+                    <td>
+                        &#8377; @Html.DisplayFor(modelItem => item.minquote)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @if (Session["userid"].ToString() == "admin")
+                        {
+                            @Html.ActionLink("Details", "TendorDetails", new { id = item.tid });
+                        }
+                        else
+                        {
+                            <a href="Contractor/TendorDetails/@item.tid">Details</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
